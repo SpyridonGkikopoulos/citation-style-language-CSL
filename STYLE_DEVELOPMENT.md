@@ -21,7 +21,7 @@ Zotero includes a [built-in CSL Style Editor](https://zotero.org/support/dev/cit
 
 You can also edit CSL styles in any plain text editor (e.g. Notepad on Windows or TextEdit on macOS). 
 Note that text editors with XML support can be very useful by offering features like syntax highlighting and real-time validation. 
-Popular choices are [Atom Editor](https://atom.io/), [VS Code](https://code.visualstudio.com/), the [oXygen XML Editor](https://www.oxygenxml.com/), [Emacs in nXML mode](https://www.thaiopensource.com/nxml-mode/), and [jEdit](https://www.jedit.org/). 
+Popular choices are [VS Code](https://code.visualstudio.com/), the [oXygen XML Editor](https://www.oxygenxml.com/), [Emacs in nXML mode](https://www.thaiopensource.com/nxml-mode/), and [jEdit](https://www.jedit.org/). 
 
 Currently, most documentation for editing CSL styles can be found at:
 
@@ -34,7 +34,7 @@ If you want to improve an existing CSL style, make sure that you start from the 
 The most recent version of each CSL style can be found in the [`master` branch of this repository](https://github.com/citation-style-language/styles).
 
 If you want to create a new style, find an existing style that closely matches what you need using the previews in the style repository. 
-Typically the best way to find a most similar style is the ["seach by example"](http://editor.citationstyles.org/searchByExample/) function of the CSL Visual Editor. 
+Typically the best way to find a most similar style is the ["search by example"](http://editor.citationstyles.org/searchByExample/) function of the CSL Visual Editor. 
 
 
 ### 2 - Edit the Style
@@ -170,7 +170,7 @@ A generic structure could then look like:
 </citation>
 ```
 
-If a case is missing in your style, you can add a new case and specify how information should be rendered in that case (e.g. see [Chicago (full note)](https://www.zotero.org/styles/chicago-fullnote-bibliography?source=1) for an example).
+If a case is missing in your style, you can add a new case and specify how information should be rendered in that case (e.g. see [Chicago (notes and bibliography)](https://www.zotero.org/styles/chicago-notes-bibliography?source=1) for an example).
 
 #### Note: Updating from Older CSL Versions
 
@@ -191,7 +191,7 @@ The style title and ID are stored within the `<title/>` and `<id/>` elements nea
 For example:
 
 ```xml
-<title>American Psychological Association 6th edition</title>
+<title>APA Style 6th edition</title>
 <title-short>APA</title-short>
 <id>http://www.zotero.org/styles/apa</id>
 ```
@@ -199,11 +199,12 @@ For example:
 can be changed to:
 
 ```xml
-<title>American Psychological Association 6th edition - Modified</title>
+<title>APA Style 6th edition - Modified</title>
 <title-short>APA - modified</title-short>
 <id>http://www.zotero.org/styles/apa-modified</id>
 ```
 
+Make your style easier to find by adding appropriate [CSL subject categories](https://docs.citationstyles.org/en/stable/specification.html#appendix-i-categories). Remove the `generic-base` category if your style is a derivative of a generic style such as APA or Chicago.
 
 ## Validation
 

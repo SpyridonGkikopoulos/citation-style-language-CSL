@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-GB" page-range-format="expanded">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" page-range-format="expanded" default-locale="en-GB">
   <info>
-    <title>Leeds Beckett University - Harvard</title>
+    <title>Leeds Beckett University (author-date/Harvard)</title>
     <id>http://www.zotero.org/styles/harvard-leeds-beckett-university</id>
     <link href="http://www.zotero.org/styles/harvard-leeds-beckett-university" rel="self"/>
-    <link href="http://skillsforlearning.leedsbeckett.ac.uk/local/Quote_Unquote.pdf" rel="documentation"/>
+    <link href="https://library.leedsbeckett.ac.uk/articulate/rise/quote_unquote/index_target.html#/lessons/nPbUYlJ7xTxtNuf93tegoBBjfEyjdJdo" rel="documentation"/>
     <author>
       <name>Joe Joiner</name>
       <email>work@joejoiner.me</email>
       <uri>http://twitter.com/joejoinerr</uri>
     </author>
+    <contributor>
+      <name>Patrick O'Brien</name>
+    </contributor>
     <category citation-format="author-date"/>
-    <category field="generic-base"/>
-    <updated>2015-03-23T12:34:00+00:00</updated>
+    <updated>2026-11-05T16:36:36+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
     <terms>
       <term name="presented at">presented at</term>
+      <term name="available at">available from</term>
     </terms>
   </locale>
   <macro name="sort-term">
@@ -26,7 +29,7 @@
         <choose>
           <if variable="author">
             <names variable="author">
-              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
             </names>
           </if>
           <else>
@@ -45,7 +48,7 @@
         <choose>
           <if variable="author">
             <names variable="author">
-              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
             </names>
           </if>
           <else-if variable="container-title">
@@ -58,12 +61,7 @@
       </else-if>
       <else-if type="song" variable="composer">
         <names variable="composer">
-          <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
-        </names>
-      </else-if>
-      <else-if type="motion_picture" variable="URL" match="all">
-        <names variable="author">
-          <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+          <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
         </names>
       </else-if>
       <else-if type="motion_picture">
@@ -71,7 +69,7 @@
       </else-if>
       <else-if variable="author editor" match="any">
         <names variable="author">
-          <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+          <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
           <label form="short" prefix=" "/>
           <substitute>
             <names variable="editor"/>
@@ -89,31 +87,27 @@
   <macro name="online">
     <choose>
       <if variable="URL">
-        <group prefix=" [" suffix="]">
-          <text term="online" text-case="capitalize-first"/>
-          <choose>
-            <if type="personal_communication">
-              <text value=" discussion list"/>
-            </if>
-            <else-if type="graphic">
-              <text value=" image"/>
-            </else-if>
-            <else-if type="post-weblog">
-              <text value=" blog"/>
-            </else-if>
-            <else-if type="motion_picture">
-              <text value=" video"/>
-            </else-if>
-          </choose>
-        </group>
+        <choose>
+          <if type="personal_communication graphic post motion_picture" match="any">
+            <text variable="genre"/>
+          </if>
+        </choose>
       </if>
     </choose>
   </macro>
   <macro name="access">
     <choose>
-      <if variable="URL">
-        <text value="Available from: "/>
-        <text variable="URL" prefix="&lt;" suffix="&gt;"/>
+      <if variable="DOI">
+        <group delimiter=": ">
+          <text term="available at" text-case="capitalize-first"/>
+          <text variable="DOI" prefix="&lt;https://doi.org/" suffix="&gt;"/>
+        </group>
+      </if>
+      <else-if variable="URL">
+        <group delimiter=": ">
+          <text term="available at" text-case="capitalize-first"/>
+          <text variable="URL" prefix="&lt;" suffix="&gt;"/>
+        </group>
         <group prefix=" [" suffix="]">
           <text term="accessed" text-case="capitalize-first" suffix=" "/>
           <date variable="accessed" delimiter=" ">
@@ -122,7 +116,7 @@
             <date-part name="year"/>
           </date>
         </group>
-      </if>
+      </else-if>
     </choose>
   </macro>
   <macro name="container-title">
@@ -227,7 +221,7 @@
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <names variable="composer">
-          <name form="short" initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never" and="symbol" et-al-min="3" et-al-use-first="1"/>
+          <name form="short" initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never" and="text" et-al-min="3" et-al-use-first="1"/>
           <substitute>
             <names variable="author"/>
             <names variable="editor"/>
@@ -244,22 +238,23 @@
       </group>
     </layout>
   </citation>
-  <bibliography hanging-indent="true">
+  <bibliography hanging-indent="false">
     <sort>
       <key macro="sort-term"/>
       <key macro="year"/>
       <key variable="title"/>
     </sort>
     <layout>
-      <!-- Author/Title -->
       <text macro="sort-term"/>
-      <!-- Year -->
       <choose>
         <if type="legal_case">
           <text macro="year" prefix=" [" suffix="]"/>
         </if>
         <else-if type="legislation">
-          <number variable="chapter-number" prefix=" (c. " suffix=")"/>
+          <group delimiter=" " prefix=" (" suffix=")">
+            <label variable="chapter-number" form="short"/>
+            <number variable="chapter-number"/>
+          </group>
         </else-if>
         <else>
           <text macro="year" prefix=" (" suffix=")"/>
@@ -437,36 +432,14 @@
             <text macro="access"/>
           </group>
         </else-if>
-        <else-if type="motion_picture" variable="URL" match="all">
+        <else-if type="motion_picture" match="any">
           <group prefix=" " delimiter=". " suffix=".">
-            <group delimiter=", ">
-              <group>
-                <choose>
-                  <if variable="author">
-                    <text macro="title"/>
-                  </if>
-                </choose>
-                <text macro="online"/>
-              </group>
-              <date variable="issued" delimiter=" ">
-                <date-part name="day"/>
-                <date-part name="month"/>
-              </date>
-            </group>
+            <names variable="director">
+              <label form="verb" text-case="capitalize-first" suffix=" "/>
+              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
+            </names>
+            <date form="text" date-parts="year-month-day" variable="issued"/>
             <text macro="access"/>
-          </group>
-        </else-if>
-        <else-if type="motion_picture">
-          <group prefix=" " delimiter=". " suffix=".">
-            <group>
-              <names variable="author" prefix="Directed by ">
-                <name delimiter=", " delimiter-precedes-last="never" and="symbol"/>
-              </names>
-            </group>
-            <group delimiter=" ">
-              <text macro="publisher"/>
-              <text variable="medium" prefix="[" suffix="]"/>
-            </group>
           </group>
         </else-if>
         <else-if type="legislation">
@@ -520,7 +493,7 @@
                 <names variable="author"/>
                 <choose>
                   <if variable="URL">
-                    <text value="[Digital audio file]"/>
+                    <text variable="medium" prefix="[" suffix="]"/>
                   </if>
                 </choose>
               </group>
@@ -530,7 +503,7 @@
             <text macro="access"/>
           </group>
         </else-if>
-        <else-if type="webpage">
+        <else-if type="webpage post post-weblog" match="any">
           <group prefix=" " delimiter=". " suffix=".">
             <group delimiter=" ">
               <choose>
@@ -574,13 +547,13 @@
                         <choose>
                           <if variable="container-author">
                             <names variable="container-author">
-                              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+                              <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
                             </names>
                           </if>
                           <else>
                             <group>
                               <names variable="editor">
-                                <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="symbol"/>
+                                <name initialize-with=". " name-as-sort-order="all" delimiter=", " delimiter-precedes-last="never" and="text"/>
                               </names>
                               <text term="editor" form="short" prefix=" "/>
                             </group>
